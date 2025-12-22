@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>OrbitMesh — Evidence of What Your Gateway Enforced</title>
+    <meta name="description"
+        content="OrbitMesh captures audit-grade evidence of what your API gateway actually enforced plus immutable config lineage—monitor-only, SIEM-ready." />
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --panel: #ffffff;
+            --panel2: #ffffff;
+            --text: #0a0a0a;
+            --muted: #444;
+            --line: #e7e7e7;
+            --soft: #f6f6f6;
+            --accent: #000000;
+            --radius: 16px;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .08);
+            --max: 1120px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* Nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(255, 255, 255, .92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand img {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid var(--line);
+            background: #fff;
+        }
+
+        .brand strong {
+            letter-spacing: .2px;
+            font-size: 15px
+        }
+
+        .brand span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 2px
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        @media (max-width: 920px) {
+            .nav-links {
+                display: none
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform .12s ease, border-color .12s ease, background .12s ease;
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border-color: #cfcfcf;
+            background: #fff
+        }
+
+        .btn.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .btn.primary:hover {
+            filter: brightness(.92)
+        }
+
+        /* Hero */
+        .hero {
+            padding: 52px 0 18px
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-left {
+            padding: 22px
+        }
+
+        .hero-right {
+            padding: 18px
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 99px;
+            background: var(--text);
+            opacity: .9;
+        }
+
+        h1 {
+            margin: 10px 0 10px;
+            font-size: 44px;
+            line-height: 1.04;
+            letter-spacing: -1px;
+        }
+
+        @media (max-width:520px) {
+            h1 {
+                font-size: 34px
+            }
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0 0 16px;
+            max-width: 72ch;
+        }
+
+        .bullets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 14px 0 0;
+        }
+
+        @media (max-width:520px) {
+            .bullets {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .pill {
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 22px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--soft);
+            font-size: 12px;
+        }
+
+        .pill b {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px
+        }
+
+        .pill small {
+            display: block;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.55
+        }
+
+        .tagrow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* Waitlist */
+        .waitlist h3 {
+            margin: 0 0 6px;
+            font-size: 16px
+        }
+
+        .waitlist p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6
+        }
+
+        .form {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--text);
+            outline: none;
+            font-size: 13px;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #cfcfcf;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, .05)
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width:520px) {
+            .form-row {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .toast {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            display: none;
+            font-size: 12.5px;
+            color: var(--text);
+        }
+
+        .why-join {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+        }
+
+        .why-join h4 {
+            margin: 0 0 8px;
+            font-size: 13px
+        }
+
+        .why-join ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.6
+        }
+
+        .why-join li {
+            margin: 6px 0
+        }
+
+        .fine {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        /* Sections */
+        section {
+            padding: 26px 0
+        }
+
+        .section-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: -.2px;
+        }
+
+        .muted {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width:980px) {
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .mini {
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #fff;
+        }
+
+        .mini h4 {
+            margin: 0 0 6px;
+            font-size: 13px
+        }
+
+        .mini p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.6
+        }
+
+        .integrations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width:980px) {
+            .integrations {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .list {
+            display: grid;
+            gap: 10px
+        }
+
+        .li {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: #fff;
+            align-items: flex-start;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            color: var(--muted);
+            white-space: nowrap;
+            margin-top: 1px;
+        }
+
+        .li b {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 3px
+        }
+
+        .li span {
+            display: block;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.5
+        }
+
+        details {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #fff;
+            padding: 12px 14px;
+        }
+
+        details summary {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px
+        }
+
+        details p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.6
+        }
+
+        footer {
+            padding: 26px 0 40px;
+            border-top: 1px solid var(--line);
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .foot {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Simple separators to keep it uncluttered */
+        .sep {
+            height: 1px;
+            background: var(--line)
+        }
+
+        /* Sample queries */
+        .codebox {
+            margin-top: 10px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--soft);
+            padding: 12px;
+        }
+
+        .codebox pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        .kbd {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: black;
+            color: #fff;
+        }
+
+        /* One-card-per-row layout for Sample Queries */
+        .stack {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        /* Add styles here */
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="wrap nav-inner">
+            <a class="brand" href="#top" aria-label="OrbitMesh">
+                <!-- Keep using your attached logo file name -->
+                <img src="orbitmesh-logo.jpeg" alt="OrbitMesh logo" />
+                <div>
+                    <strong>OrbitMesh</strong>
+                    <span>Gateway continuous enforcement evidence</span>
+                </div>
+            </a>
+
+            <div class="nav-links">
+                <a href="#problem">Problem</a>
+                <a href="#regulatory">Regulatory</a>
+                <a href="#queries">Sample Queries</a>
+                <a href="#integrations">Integrations</a>
+                <a href="#how">How</a>
+                <a href="#faq">FAQ</a>
+            </div>
+
+            <a class="btn primary" href="#waitlist">Join waitlist</a>
+        </div>
+    </div>
+
+    <main id="top">
+        <div class="wrap hero">
+            <div class="hero-grid">
+                <div class="card hero-left">
+                    <div class="kicker">monitor-only • cryptographically signed evidence • siem-ready
+                    </div>
+
+                    <h1>Stop guessing. Start attesting.</h1>
+
+                    <p class="sub">
+                        OrbitMesh captures <b>audit-grade evidence</b> of what your API gateway actually enforced
+                        (TLS/mTLS, JWT outcomes, route decisions, upstream attempts, phase-level timing) and ties it to
+                        <b>immutable config lineage</b>. No traffic blocking. No routing changes. Just defensible truth.
+                    </p>
+
+                    <div class="bullets">
+                        <div class="pill">
+                            <span class="icon">✓</span>
+                            <div>
+                                <b>Zero impact on p99 (design goal)</b>
+                                <small>Non-blocking capture patterns designed to avoid request-path stalls.</small>
+                            </div>
+                        </div>
+                        <div class="pill">
+                            <span class="icon">⛓</span>
+                            <div>
+                                <b>Cryptographic chain-of-custody</b>
+                                <small>Hash-linked, tamper-evident evidence tied to config snapshot IDs.</small>
+                            </div>
+                        </div>
+                        <div class="pill">
+                            <span class="icon">💾</span>
+                            <div>
+                                <b>Up to 90% lower storage</b>
+                                <small>Shallow vs deep streams reduce noise while preserving forensic fidelity.</small>
+                            </div>
+                        </div>
+                        <div class="pill">
+                            <span class="icon">🧠</span>
+                            <div>
+                                <b>Root-cause ready</b>
+                                <small>Phase + backend attribution to accelerate investigations.</small>
+                            </div>
+                        </div>
+
+                        <div class="pill">
+                            <span class="icon">🎯</span>
+
+                            <div>
+                                <b>API Truthfulness</b>
+                                <small>Sitting in the datapath, we provide real-time attestations and forensic certainty
+                                    that passive observation cannot match.</small>
+                            </div>
+                        </div>
+
+                        <div class="pill">
+                            <span class="icon">📦</span>
+
+                            <div>
+                                <b>API Truthfulness</b>
+                                <small>Deploy bank-grade forensics in minutes, that never blocks your datapath.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tagrow" style="margin-top: 45px;">
+                        <span class="tag">Evidence integrity</span>
+                        <span class="tag">Config lineage & drift</span>
+                        <span class="tag">TLS / JWT enforcement</span>
+                        <span class="tag">Incident root-cause</span>
+                    </div>
+                </div>
+
+                <aside class="card hero-right" id="waitlist">
+                    <div class="waitlist">
+                        <h3>Join the waitlist</h3>
+                        <p>Tell us your gateway + SIEM. We’ll prioritize integrations based on real demand.</p>
+
+                        <form class="form" id="waitlistForm" action="https://formsubmit.co/orbitmeshio@gmail.com"
+                            method="POST">
+                            <input type="hidden" name="_subject" value="OrbitMesh waitlist" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_next" value="https://formsubmit.co/thank-you" />
+                            <div style="display:none;">
+                                <label>Comments
+                                    <input name="comments" type="text" tabindex="-1" autocomplete="off" />
+                                </label>
+                            </div>
+                            <input name="email" type="email" placeholder="Work email" required />
+                            <div class="form-row">
+                                <select name="gateway" required>
+                                    <option value="" disabled selected>Gateway</option>
+                                    <option>NGINX</option>
+                                    <option>Envoy</option>
+                                    <option>HAProxy</option>
+                                    <option>Kong</option>
+                                    <option>APISIX</option>
+                                    <option>Other</option>
+                                </select>
+                                <select name="siem" required>
+                                    <option value="" disabled selected>Primary SIEM</option>
+                                    <option>Splunk</option>
+                                    <option>Microsoft Sentinel</option>
+                                    <option>Elastic (ELK)</option>
+                                    <option>IBM QRadar</option>
+                                    <option>Google Chronicle</option>
+                                    <option>Sumo Logic</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <input name="company" type="text" placeholder="Company (optional)" />
+                            <textarea name="note"
+                                placeholder="Optional: What audit / incident question do you struggle to answer today?"></textarea>
+                            <button class="btn primary" type="submit">Join waitlist</button>
+
+                            <div class="toast" id="toast">Thanks — you’re on the list.</div>
+
+                            <div class="why-join">
+                                <h4>Why teams are joining</h4>
+                                <ul>
+                                    <li><b>Zero impact on p99</b> is a design requirement.</li>
+                                    <li><b>Chain-of-custody</b> makes tampering detectable and defensible.</li>
+                                    <li><b>Up to 90% storage savings</b> with shallow/deep evidence streams.</li>
+                                    <li><b>2026 Audit Readiness</b>cryptographically provable, continuous monitoring of
+                                        every single request—shifting from reactive logs to proactive runtime
+                                        attestation.</li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <!-- 1) Problem -->
+        <section id="problem">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>The problem</h2>
+                </div>
+                <p class="muted">Most logs say 'a request happened.' Auditors ask 'what controls were enforced?</p>
+                <p class="muted" style="margin-top: 5px;">In the 2026 regulatory landscape, "Adequate" is no longer the
+                    standard; Continuous
+                    Proof is. Frameworks like DORA (Article 17) and PCI DSS 4.0 have moved beyond traditional sampling,
+                    now requiring financial entities to demonstrate that security controls—like mTLS, rate limiting, and
+                    JWT validation—were active and effective for 100% of transactions, not just a sampled subset.</p>
+
+                <p class="muted" style="margin-top: 5px;">OrbitMesh bridges the "Accountability Gap" by sitting directly
+                    in the datapath to provide Runtime Attestation. Instead of an auditor asking for a manual sample,
+                    we provide an immutable, cryptographically-linked record of every request, proving that your
+                    security policy was enforced at the exact millisecond of execution.</p>
+
+                <div class="grid-3" style="margin-top: 10px;">
+                    <div class="mini">
+                        <h4>Audits need evidence</h4>
+                        <p>Prove TLS policy, JWT enforcement, route decisions, and outcomes at request time—without
+                            external guesswork.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Config truth is blurry</h4>
+                        <p>During incidents, teams can’t confidently answer what config was running and whether drift
+                            occurred.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>SIEM is flooded</h4>
+                        <p>Raw access logs create volume without fidelity. OrbitMesh focuses on high-value enforcement
+                            facts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 2) Regulatory Storm (second section as requested) -->
+        <section id="regulatory">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Engineered for the 2026 Regulatory Storm</h2>
+                </div>
+
+                <p class="muted">Compliance-ready evidence framing (monitor-only; avoids raw payload storage).</p>
+
+                <div class="grid-3" style="margin-top: 10px;">
+                    <div class="mini">
+                        <h4>DORA — Article 17</h4>
+                        <p>Supports root-cause analysis by recording the gateway phase and specific backend instance
+                            involved in failures.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>PCI-DSS 4.0 (10.2.x)</h4>
+                        <p>Captures user identifiers, source port, and success/failure indicators with PII-minimized
+                            evidence patterns.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>SOC 2 effectiveness</h4>
+                        <p>Signed evidence that controls like rate limiting, JWT validation, and mTLS enforcement were
+                            active for evaluated traffic.</p>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-top:12px">
+                    <div class="mini">
+                        <h4>Supply chain & deployment integrity</h4>
+                        <p>Tracks config lineage and upstream service versions to detect drift and shadow deployments.
+                            Optional hooks for runtime SBOM attestation workflows.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Evidence integrity under breach</h4>
+                        <p>Hash-linked chain-of-custody makes deletion/reordering/modification detectable during audit
+                            or legal review.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Operational safety under pressure</h4>
+                        <p>Shallow vs deep streams reduce “data tsunami” risk during incidents while preserving
+                            high-fidelity forensics when anomalies occur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 4) Sample Queries -->
+        <section id="queries">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Sample Queries & Reports</h2>
+                </div>
+                <p class="muted">Examples of the questions OrbitMesh enables across audits, monitoring, and rapid
+                    isolation.</p>
+
+                <div class="stack" style="margin-top: 10px;">
+
+                    <div class="mini">
+                        <h4>Major Incident Evidence</h4>
+                        <p>Automated root-cause isolation for DORA Article 17 compliance.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Generate a DORA Major Incident Report for last Tuesday's 5xx spike on the Payments Gateway.
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Third-Party Risk Mapping</h4>
+                        <p>Identify every ICT provider and service version involved in performance degradations.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Which third-party ICT providers were involved in the latency degradation on July 10th?
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini">
+                        <h4>MTTR Resilience Audit</h4>
+                        <p>High-precision recovery window analysis across the entire API perimeter.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Produce a 3-month resilience report showing Mean Time to Recovery (MTTR).
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Config Lineage Attestation</h4>
+                        <p>Detect "Shadow Deployments" by verifying the cryptographic lineage of every request.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Show me every request handled by a non-compliant configuration lineage since Monday.
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Agentic AI Governance</h4>
+                        <p>Audit high-risk operations performed by AI agents or automated subjects.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Did any AI Agents perform unauthorized 'Write' operations during the Q3 audit window?
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Payload Integrity Proof</h4>
+                        <p>Zero-Trust verification to ensure no data tampering occurred in transit.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Audit the integrity of the response payloads for the /v1/transfer endpoint over the last 30 days.
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Latency Tax Analysis</h4>
+                        <p>Prove the efficiency of your compliance layer during high-traffic peaks.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+What was the 'Latency Tax' of our compliance layer during the 100k req/sec peak yesterday?
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Phase-Level Forensics</h4>
+                        <p>Drill down into exactly where security controls blocked an attack.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Drill down into the forensic details for all SQL Injection attempts blocked at the 'Access Phase'.
+</pre>
+
+                        </div>
+                    </div>
+
+                    <div class="mini collapsible-item" style="display:none;">
+                        <h4>Shadow API Discovery</h4>
+                        <p>Identify undocumented endpoints that are currently receiving traffic.</p>
+                        <div class="codebox">
+                            <pre><span class="kbd">Query</span>
+Identify all 'Shadow APIs' currently receiving traffic that are missing from our official SBOM.
+</pre>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="btn" id="toggleQueriesBtn" style="margin-top:12px; width:100%;">Show more
+                    queries</button>
+
+                <div class="mini" style="margin-top:12px; background: var(--soft);">
+                    <h4>What makes these queries different?</h4>
+                    <p>
+                        Each result can be tied back to <b>immutable config lineage</b> (<b>config_snapshot_id</b>) and
+                        <b>tamper-evident evidence</b>
+                        (chain-of-custody). This is how you answer audit questions like "what was enforced at request
+                        time?" with confidence.
+                    </p>
+                </div>
+
+                <script>
+                    document.getElementById('toggleQueriesBtn').addEventListener('click', function () {
+                        const items = document.querySelectorAll('.collapsible-item');
+                        const isHidden = items[0].style.display === 'none';
+
+                        items.forEach(item => {
+                            item.style.display = isHidden ? 'block' : 'none';
+                        });
+
+                        this.textContent = isHidden ? 'Show fewer queries' : 'Show more queries';
+                    });
+                </script>
+            </div>
+        </section>
+
+
+        <!-- 3) Integrations -->
+        <section id="integrations">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Integrations</h2>
+                </div>
+                <p class="muted">SIEM-first, with standard ingestion paths.</p>
+
+                <div class="integrations" style="margin-top: 10px;">
+                    <div class="list">
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>Splunk</b><span>HEC + sourcetype templates for “gateway-evidence” events.</span>
+                            </div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>Microsoft Sentinel</b><span>Azure Monitor / Log Analytics ingestion patterns.</span>
+                            </div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>Elastic (ELK)</b><span>Elastic Agent / Beats / Logstash pipelines + ECS
+                                    mapping.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>IBM QRadar</b><span>Syslog / DSM-friendly event formatting.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>Google Chronicle</b><span>Forward via cloud logging / forwarders where
+                                    applicable.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">SIEM</span>
+                            <div><b>Sumo Logic</b><span>HTTP source / collector pipeline support.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="list">
+                        <div class="li">
+                            <span class="badge">Pipes</span>
+                            <div><b>Syslog (RFC5424)</b><span>Lowest-friction enterprise ingestion path.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">Pipes</span>
+                            <div><b>Kafka</b><span>High-throughput streaming into existing pipelines.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">Pipes</span>
+                            <div><b>S3 / Blob Archive</b><span>Batch evidence files for offline analytics +
+                                    retention.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">Format</span>
+                            <div><b>JSON / NDJSON</b><span>Readable, searchable, SIEM-friendly for early
+                                    deployments.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">Format</span>
+                            <div><b>Binary evidence (optional)</b><span>Compact structured export when volume demands
+                                    it.</span></div>
+                        </div>
+                        <div class="li">
+                            <span class="badge">Pipes</span>
+                            <div><b>OpenTelemetry Logs (optional)</b><span>When teams standardize on OTel for
+                                    logs.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 4) How it works (last-but-one before FAQ, as requested) -->
+        <section id="how">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>How it works</h2>
+                </div>
+
+                <div class="grid-3">
+                    <div class="mini">
+                        <h4>1) Capture enforcement truth</h4>
+                        <p>TLS/mTLS details, JWT outcomes (reason codes), route match, upstream attempts, and
+                            phase-level timing.</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>2) Snapshot config lineage</h4>
+                        <p>Structured snapshots on reload/restart. Each request references a snapshot ID for “what was
+                            active then.”</p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>3) Tamper-evident evidence</h4>
+                        <p>Hash linking makes deletion/reordering/modification detectable during audit or legal review.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mini" style="margin-top:12px; background: var(--soft);">
+                    <h4>Architecture (high level)</h4>
+                    <p>
+                        OrbitMesh is a <b>low-level, C-based gateway agent</b> built for correctness and minimal
+                        overhead. It writes fixed-size
+                        evidence records using non-blocking techniques and streams structured evidence to your existing
+                        collectors for archival
+                        and analysis.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 5) FAQ -->
+        <section id="faq">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>FAQ</h2>
+                </div>
+                <p class="muted">Clear boundaries (truthful positioning).</p>
+                <div class="grid-3" style="margin-top: 10px;">
+                    <details>
+                        <summary>Is OrbitMesh a WAF or prevention tool?</summary>
+                        <p>No. OrbitMesh is monitor-only. It does not block requests or modify routing. It produces
+                            evidence of enforcement and config lineage.</p>
+                    </details>
+
+                    <details>
+                        <summary>Do you provide resiliency / failover?</summary>
+                        <p>No. OrbitMesh does not provide traffic resiliency (failover, retries, routing decisions). It
+                            provides evidence integrity and forensic continuity under pressure.</p>
+                    </details>
+
+                    <details>
+                        <summary>How do you avoid impacting p99?</summary>
+                        <p>Design goal is minimal request-path work and predictable memory usage. Export can be
+                            buffered/batched and offloaded to a relay/collector depending on deployment.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="wrap foot">
+                <div>
+                    <b>OrbitMesh</b> - gateway enforcement evidence
+                    <div style="margin-top:6px">© <span id="year"></span></div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const form = document.getElementById('waitlistForm');
+        form.addEventListener('submit', (e) => {
+            const honeypot = form.elements['comments'];
+            if (honeypot && honeypot.value.trim().length > 0) {
+                e.preventDefault();
+                return;
+            }
+        });
+    </script>
+</body>
+
+</html>
