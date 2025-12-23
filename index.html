@@ -8,18 +8,25 @@
     <meta name="description"
         content="OrbitMesh captures audit-grade evidence of what your API gateway actually enforced plus immutable config lineage—monitor-only, SIEM-ready." />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
-            --bg: #ffffff;
-            --panel: #ffffff;
-            --panel2: #ffffff;
-            --text: #0a0a0a;
-            --muted: #444;
-            --line: #e7e7e7;
-            --soft: #f6f6f6;
-            --accent: #000000;
-            --radius: 16px;
-            --shadow: 0 18px 50px rgba(0, 0, 0, .08);
+            --bg: #0a1524;
+            --bg2: #11263a;
+            --panel: #0f1f32;
+            --panel2: #12253b;
+            --text: #b9c7d9;
+            --muted: #7f94b0;
+            --line: rgba(255, 255, 255, 0.08);
+            --soft: rgba(255, 255, 255, 0.04);
+            --accent: #2da8ff;
+            --accent2: #2bd1a2;
+            --radius: 18px;
+            --shadow: 0 22px 60px rgba(0, 0, 0, .4);
             --max: 1120px;
         }
 
@@ -34,9 +41,11 @@
 
         body {
             margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            font-family: "Space Grotesk", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             color: var(--text);
-            background: var(--bg);
+            background: radial-gradient(circle at 20% 20%, rgba(45, 168, 255, 0.16), transparent 32%),
+                radial-gradient(circle at 78% 6%, rgba(43, 209, 162, 0.16), transparent 32%),
+                linear-gradient(135deg, var(--bg), var(--bg2));
             overflow-x: hidden;
         }
 
@@ -56,8 +65,8 @@
             position: sticky;
             top: 0;
             z-index: 30;
-            background: rgba(255, 255, 255, .92);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 21, 36, 0.8);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--line);
         }
 
@@ -65,7 +74,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 0;
+            padding: 16px 0;
             gap: 16px;
         }
 
@@ -76,12 +85,13 @@
         }
 
         .brand img {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             object-fit: cover;
             border: 1px solid var(--line);
-            background: #fff;
+            background: #0a1421;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
         .brand strong {
@@ -104,11 +114,13 @@
 
         .nav-links a {
             color: var(--muted);
-            font-size: 13px
+            font-size: 13px;
+            letter-spacing: .2px;
+            transition: color .15s ease;
         }
 
         .nav-links a:hover {
-            color: var(--text)
+            color: #fff;
         }
 
         @media (max-width: 920px) {
@@ -121,37 +133,39 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
-            background: #fff;
+            padding: 11px 16px;
+            border-radius: 14px;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.12), rgba(43, 209, 162, 0.12));
             color: var(--text);
             font-weight: 700;
             font-size: 13px;
             cursor: pointer;
-            transition: transform .12s ease, border-color .12s ease, background .12s ease;
+            transition: transform .12s ease, border-color .12s ease, background .12s ease, box-shadow .12s ease;
             user-select: none;
         }
 
         .btn:hover {
             transform: translateY(-1px);
-            border-color: #cfcfcf;
-            background: #fff
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         .btn.primary {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #04101c;
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 14px 40px rgba(45, 168, 255, 0.35);
         }
 
         .btn.primary:hover {
-            filter: brightness(.92)
+            filter: brightness(1.05);
         }
 
         /* Hero */
         .hero {
-            padding: 52px 0 18px
+            padding: 64px 0 24px;
+            position: relative;
         }
 
         .hero-grid {
@@ -168,30 +182,32 @@
         }
 
         .card {
-            background: var(--panel);
+            background: linear-gradient(145deg, rgba(15, 31, 50, 0.9), rgba(18, 37, 59, 0.9));
             border: 1px solid var(--line);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
         }
 
         .hero-left {
-            padding: 22px
+            padding: 26px;
         }
 
         .hero-right {
-            padding: 18px
+            padding: 22px;
         }
 
         .kicker {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 10px;
+            padding: 6px 12px;
             border: 1px solid var(--line);
             border-radius: 999px;
-            background: var(--soft);
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.1), rgba(43, 209, 162, 0.1));
             color: var(--muted);
             font-size: 12px;
+            letter-spacing: 0.3px;
             margin-bottom: 10px;
         }
 
@@ -204,9 +220,9 @@
         }
 
         h1 {
-            margin: 10px 0 10px;
-            font-size: 44px;
-            line-height: 1.04;
+            margin: 10px 0 12px;
+            font-size: 46px;
+            line-height: 1.05;
             letter-spacing: -1px;
         }
 
@@ -220,7 +236,7 @@
             color: var(--muted);
             font-size: 15px;
             line-height: 1.7;
-            margin: 0 0 16px;
+            margin: 0 0 18px;
             max-width: 72ch;
         }
 
@@ -239,8 +255,8 @@
 
         .pill {
             border: 1px solid var(--line);
-            background: #fff;
-            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border-radius: 16px;
             padding: 12px;
             display: flex;
             gap: 10px;
@@ -256,7 +272,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--soft);
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.25), rgba(43, 209, 162, 0.25));
             font-size: 12px;
         }
 
@@ -281,10 +297,10 @@
         }
 
         .tag {
-            padding: 7px 10px;
+            padding: 7px 11px;
             border-radius: 999px;
             border: 1px solid var(--line);
-            background: var(--soft);
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.12), rgba(43, 209, 162, 0.12));
             color: var(--muted);
             font-size: 12px;
         }
@@ -315,7 +331,7 @@
             padding: 11px 12px;
             border-radius: 12px;
             border: 1px solid var(--line);
-            background: #fff;
+            background: #0a1421;
             color: var(--text);
             outline: none;
             font-size: 13px;
@@ -329,8 +345,8 @@
         input:focus,
         select:focus,
         textarea:focus {
-            border-color: #cfcfcf;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, .05)
+            border-color: rgba(45, 168, 255, 0.6);
+            box-shadow: 0 0 0 3px rgba(45, 168, 255, 0.18);
         }
 
         .form-row {
@@ -350,7 +366,7 @@
             padding: 10px 12px;
             border-radius: 12px;
             border: 1px solid var(--line);
-            background: var(--soft);
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.12), rgba(43, 209, 162, 0.12));
             display: none;
             font-size: 12.5px;
             color: var(--text);
@@ -361,7 +377,7 @@
             padding: 12px;
             border-radius: 14px;
             border: 1px solid var(--line);
-            background: var(--soft);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
         }
 
         .why-join h4 {
@@ -434,7 +450,7 @@
             padding: 14px;
             border: 1px solid var(--line);
             border-radius: 14px;
-            background: #fff;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
         }
 
         .mini h4 {
@@ -472,7 +488,7 @@
             padding: 12px;
             border-radius: 14px;
             border: 1px solid var(--line);
-            background: #fff;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
             align-items: flex-start;
         }
 
@@ -481,7 +497,7 @@
             padding: 4px 8px;
             border-radius: 999px;
             border: 1px solid var(--line);
-            background: var(--soft);
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.12), rgba(43, 209, 162, 0.12));
             color: var(--muted);
             white-space: nowrap;
             margin-top: 1px;
@@ -503,19 +519,21 @@
         details {
             border: 1px solid var(--line);
             border-radius: 14px;
-            background: #fff;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
             padding: 12px 14px;
+            color: var(--text);
         }
 
         details summary {
             cursor: pointer;
             font-weight: 700;
-            font-size: 13px
+            font-size: 13px;
+            color: var(--text);
         }
 
         details p {
             margin: 10px 0 0;
-            color: var(--muted);
+            color: #d4e6ff;
             font-size: 12.5px;
             line-height: 1.6
         }
@@ -577,6 +595,25 @@
         }
 
         /* Add styles here */
+
+        /* Accent halo behind hero */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -120px -160px auto -160px;
+            height: 320px;
+            background: radial-gradient(circle at 30% 60%, rgba(45, 168, 255, 0.28), transparent 50%),
+                radial-gradient(circle at 70% 40%, rgba(43, 209, 162, 0.24), transparent 45%);
+            filter: blur(38px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-grid,
+        .wrap {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
