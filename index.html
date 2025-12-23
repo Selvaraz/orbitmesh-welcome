@@ -34,18 +34,24 @@
             box-sizing: border-box
         }
 
-        html,
+        html {
+            min-height: 100%;
+            background: linear-gradient(180deg, #0a1524 0%, #0b1a2b 55%, #0c2034 100%);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
         body {
             height: 100%
         }
 
         body {
+            min-height: 100%;
             margin: 0;
             font-family: "Space Grotesk", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             color: var(--text);
-            background: radial-gradient(circle at 20% 20%, rgba(45, 168, 255, 0.16), transparent 32%),
-                radial-gradient(circle at 78% 6%, rgba(43, 209, 162, 0.16), transparent 32%),
-                linear-gradient(135deg, var(--bg), var(--bg2));
+            background: transparent;
+            /* important: don't re-paint gradient here */
             overflow-x: hidden;
         }
 
@@ -554,6 +560,15 @@
 
         .compare-table tbody tr:nth-child(odd) {
             background: rgba(255, 255, 255, 0.02);
+        }
+
+        .arch-diagram {
+            display: block;
+            margin: 14px auto 0;
+            max-width: 100%;
+            /* border-radius: 12px;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow); */
         }
 
         details {
@@ -1217,6 +1232,7 @@ Identify all 'Shadow APIs' currently receiving traffic that are missing from our
                         collectors for archival
                         and analysis.
                     </p>
+                    <img src="orbit-architecture.png" alt="OrbitMesh architecture diagram" class="arch-diagram" />
                 </div>
             </div>
         </section>
