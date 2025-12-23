@@ -423,7 +423,7 @@
 
         h2 {
             margin: 0;
-            font-size: 18px;
+            font-size: 25px;
             letter-spacing: -.2px;
         }
 
@@ -503,47 +503,6 @@
             margin-top: 1px;
         }
 
-        .badge-logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 68px;
-            height: 22px;
-            padding: 0 10px;
-            border-radius: 999px;
-            border: 1px solid var(--line);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            text-transform: lowercase;
-            color: #f6f7fb;
-            background: #1b2635;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-        }
-
-        .badge-logo.splunk {
-            background: linear-gradient(135deg, #101010, #1f1f1f);
-        }
-
-        .badge-logo.sentinel {
-            background: linear-gradient(135deg, #b80b36, #e41d48);
-        }
-
-        .badge-logo.elastic {
-            background: linear-gradient(135deg, #283548, #3b4f6a);
-        }
-
-        .badge-logo.qradar {
-            background: linear-gradient(135deg, #123f66, #0f2f4c);
-        }
-
-        .badge-logo.chronicle {
-            background: linear-gradient(135deg, #0f3a4d, #125c72);
-        }
-
-        .badge-logo.sumo {
-            background: linear-gradient(135deg, #0d61c2, #0a4f9b);
-        }
 
         .li b {
             display: block;
@@ -556,6 +515,45 @@
             color: var(--muted);
             font-size: 14px;
             line-height: 1.6
+        }
+
+        .table-card {
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 520px;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, rgba(45, 168, 255, 0.14), rgba(43, 209, 162, 0.08));
+            color: #e9f4ff;
+            font-weight: 700;
+            letter-spacing: 0.1px;
+        }
+
+        .compare-table td {
+            color: var(--muted);
+        }
+
+        .compare-table tbody tr:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         details {
@@ -598,8 +596,8 @@
 
         /* Simple separators to keep it uncluttered */
         .sep {
-            height: 1px;
-            background: var(--line)
+            /* height: 1px;
+            background: var(--line) */
         }
 
         /* Sample queries */
@@ -625,7 +623,7 @@
             padding: 2px 7px;
             border-radius: 999px;
             border: 1px solid var(--line);
-            background: black;
+            background: #2da8ff;
             color: #fff;
         }
 
@@ -674,6 +672,7 @@
             <div class="nav-links">
                 <a href="#problem">Problem</a>
                 <a href="#regulatory">Regulatory</a>
+                <a href="#comparison">Comparison</a>
                 <a href="#queries">Sample Queries</a>
                 <a href="#integrations">Integrations</a>
                 <a href="#how">How</a>
@@ -915,6 +914,64 @@
 
         <div class="sep"></div>
 
+        <!-- Comparison -->
+        <section id="comparison">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>OrbitMesh vs Legacy Approaches</h2>
+                </div>
+                <p class="muted">Continuous, cryptographically provable enforcement evidence versus sampled, mutable
+                    logs.</p>
+
+                <div class="table-card">
+                    <table class="compare-table" aria-label="OrbitMesh comparison table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Legacy Gateway Logs</th>
+                                <th>Cloud Security Proxies</th>
+                                <th>OrbitMesh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Audit Coverage</td>
+                                <td>1–5% (Sampled)</td>
+                                <td>Sampled (Mirror Mode)</td>
+                                <td>100% (Continuous)</td>
+                            </tr>
+                            <tr>
+                                <td>Integrity Proof</td>
+                                <td>None (Mutable)</td>
+                                <td>None (SaaS-Stored)</td>
+                                <td>Cryptographic Hash Chain</td>
+                            </tr>
+                            <tr>
+                                <td>Performance Tax</td>
+                                <td>Low</td>
+                                <td>High (5–20ms)</td>
+                                <td>Near-Zero (&lt;1% CPU)</td>
+                            </tr>
+                            <tr>
+                                <td>Config Awareness</td>
+                                <td>"File changed"</td>
+                                <td>Structural only</td>
+                                <td>Semantic Drift (AST-based)</td>
+                            </tr>
+                            <tr>
+                                <td>Regulatory Fit</td>
+                                <td>Partial</td>
+                                <td>HIPAA/SOC 2</td>
+                                <td>DORA / PCI-DSS 4.0 Ready</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
         <!-- 4) Sample Queries -->
         <section id="queries">
             <div class="wrap">
@@ -1059,31 +1116,31 @@ Identify all 'Shadow APIs' currently receiving traffic that are missing from our
                 <div class="integrations" style="margin-top: 10px;">
                     <div class="list">
                         <div class="li">
-                            <span class="badge-logo splunk" aria-label="Splunk">splunk&gt;</span>
+                            <span class="badge">SIEM</span>
                             <div><b>Splunk</b><span>HEC + sourcetype templates for “gateway-evidence” events.</span>
                             </div>
                         </div>
                         <div class="li">
-                            <span class="badge-logo sentinel" aria-label="Microsoft Sentinel">sentinel</span>
+                            <span class="badge">SIEM</span>
                             <div><b>Microsoft Sentinel</b><span>Azure Monitor / Log Analytics ingestion patterns.</span>
                             </div>
                         </div>
                         <div class="li">
-                            <span class="badge-logo elastic" aria-label="Elastic">elastic</span>
+                            <span class="badge">SIEM</span>
                             <div><b>Elastic (ELK)</b><span>Elastic Agent / Beats / Logstash pipelines + ECS
                                     mapping.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge-logo qradar" aria-label="IBM QRadar">qradar</span>
+                            <span class="badge">SIEM</span>
                             <div><b>IBM QRadar</b><span>Syslog / DSM-friendly event formatting.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge-logo chronicle" aria-label="Google Chronicle">chronicle</span>
+                            <span class="badge">SIEM</span>
                             <div><b>Google Chronicle</b><span>Forward via cloud logging / forwarders where
                                     applicable.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge-logo sumo" aria-label="Sumo Logic">sumo</span>
+                            <span class="badge">SIEM</span>
                             <div><b>Sumo Logic</b><span>HTTP source / collector pipeline support.</span></div>
                         </div>
                     </div>
