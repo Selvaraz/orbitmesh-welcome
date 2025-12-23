@@ -234,7 +234,7 @@
 
         .sub {
             color: var(--muted);
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.7;
             margin: 0 0 18px;
             max-width: 72ch;
@@ -314,7 +314,7 @@
         .waitlist p {
             margin: 0 0 12px;
             color: var(--muted);
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.6
         }
 
@@ -389,7 +389,7 @@
             margin: 0;
             padding-left: 18px;
             color: var(--muted);
-            font-size: 12.5px;
+            font-size: 13px;
             line-height: 1.6
         }
 
@@ -400,8 +400,8 @@
         .fine {
             margin-top: 10px;
             color: var(--muted);
-            font-size: 12px;
-            line-height: 1.5;
+            font-size: 12.5px;
+            line-height: 1.55;
         }
 
         .mono {
@@ -430,8 +430,8 @@
         .muted {
             margin: 0;
             color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 17px;
+            line-height: 1.7;
         }
 
         .grid-3 {
@@ -455,14 +455,14 @@
 
         .mini h4 {
             margin: 0 0 6px;
-            font-size: 13px
+            font-size: 15px
         }
 
         .mini p {
             margin: 0;
             color: var(--muted);
-            font-size: 12.5px;
-            line-height: 1.6
+            font-size: 16px;
+            line-height: 1.68
         }
 
         .integrations {
@@ -503,6 +503,48 @@
             margin-top: 1px;
         }
 
+        .badge-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 68px;
+            height: 22px;
+            padding: 0 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            text-transform: lowercase;
+            color: #f6f7fb;
+            background: #1b2635;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .badge-logo.splunk {
+            background: linear-gradient(135deg, #101010, #1f1f1f);
+        }
+
+        .badge-logo.sentinel {
+            background: linear-gradient(135deg, #b80b36, #e41d48);
+        }
+
+        .badge-logo.elastic {
+            background: linear-gradient(135deg, #283548, #3b4f6a);
+        }
+
+        .badge-logo.qradar {
+            background: linear-gradient(135deg, #123f66, #0f2f4c);
+        }
+
+        .badge-logo.chronicle {
+            background: linear-gradient(135deg, #0f3a4d, #125c72);
+        }
+
+        .badge-logo.sumo {
+            background: linear-gradient(135deg, #0d61c2, #0a4f9b);
+        }
+
         .li b {
             display: block;
             font-size: 13px;
@@ -512,8 +554,8 @@
         .li span {
             display: block;
             color: var(--muted);
-            font-size: 12.5px;
-            line-height: 1.5
+            font-size: 14px;
+            line-height: 1.6
         }
 
         details {
@@ -534,7 +576,7 @@
         details p {
             margin: 10px 0 0;
             color: #d4e6ff;
-            font-size: 12.5px;
+            font-size: 17px;
             line-height: 1.6
         }
 
@@ -573,8 +615,8 @@
             margin: 0;
             white-space: pre-wrap;
             word-break: break-word;
-            font-size: 12.5px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.62;
         }
 
         .kbd {
@@ -1017,31 +1059,31 @@ Identify all 'Shadow APIs' currently receiving traffic that are missing from our
                 <div class="integrations" style="margin-top: 10px;">
                     <div class="list">
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo splunk" aria-label="Splunk">splunk&gt;</span>
                             <div><b>Splunk</b><span>HEC + sourcetype templates for “gateway-evidence” events.</span>
                             </div>
                         </div>
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo sentinel" aria-label="Microsoft Sentinel">sentinel</span>
                             <div><b>Microsoft Sentinel</b><span>Azure Monitor / Log Analytics ingestion patterns.</span>
                             </div>
                         </div>
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo elastic" aria-label="Elastic">elastic</span>
                             <div><b>Elastic (ELK)</b><span>Elastic Agent / Beats / Logstash pipelines + ECS
                                     mapping.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo qradar" aria-label="IBM QRadar">qradar</span>
                             <div><b>IBM QRadar</b><span>Syslog / DSM-friendly event formatting.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo chronicle" aria-label="Google Chronicle">chronicle</span>
                             <div><b>Google Chronicle</b><span>Forward via cloud logging / forwarders where
                                     applicable.</span></div>
                         </div>
                         <div class="li">
-                            <span class="badge">SIEM</span>
+                            <span class="badge-logo sumo" aria-label="Sumo Logic">sumo</span>
                             <div><b>Sumo Logic</b><span>HTTP source / collector pipeline support.</span></div>
                         </div>
                     </div>
