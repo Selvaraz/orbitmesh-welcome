@@ -10,8 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -48,7 +47,9 @@
         body {
             min-height: 100%;
             margin: 0;
-            font-family: "Space Grotesk", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: "Inter", -apple-system, system-ui, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
             color: var(--text);
             background: transparent;
             /* important: don't re-paint gradient here */
@@ -240,9 +241,9 @@
 
         .sub {
             color: var(--muted);
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.7;
-            margin: 0 0 18px;
+            margin: 0 0 14px;
             max-width: 72ch;
         }
 
@@ -436,7 +437,7 @@
         .muted {
             margin: 0;
             color: var(--muted);
-            font-size: 17px;
+            font-size: 14px;
             line-height: 1.7;
         }
 
@@ -467,7 +468,7 @@
         .mini p {
             margin: 0;
             color: var(--muted);
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.68
         }
 
@@ -544,7 +545,7 @@
             padding: 11px 12px;
             border: 1px solid var(--line);
             text-align: left;
-            font-size: 15px;
+            font-size: 12px;
         }
 
         .compare-table th {
@@ -565,7 +566,7 @@
         .arch-diagram {
             display: block;
             margin: 14px auto 0;
-            max-width: 100%;
+            max-width: 55%;
             /* border-radius: 12px;
             border: 1px solid var(--line);
             box-shadow: var(--shadow); */
