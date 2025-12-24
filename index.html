@@ -566,7 +566,7 @@
         .arch-diagram {
             display: block;
             margin: 14px auto 0;
-            max-width: 55%;
+            max-width: 65%;
             /* border-radius: 12px;
             border: 1px solid var(--line);
             box-shadow: var(--shadow); */
@@ -590,7 +590,7 @@
         details p {
             margin: 10px 0 0;
             color: #d4e6ff;
-            font-size: 17px;
+            font-size: 13px;
             line-height: 1.6
         }
 
@@ -703,7 +703,7 @@
         <div class="wrap hero">
             <div class="hero-grid">
                 <div class="card hero-left">
-                    <div class="kicker">monitor-only • cryptographically signed evidence • siem-ready
+                    <div class="kicker">monitor-only • tamper-evident evidence • siem-ready
                     </div>
 
                     <h1>Your API Gateway’s "Black Box" </h1>
@@ -712,9 +712,9 @@
                         trust.</p>
 
                     <p class="sub">
-                        OrbitMesh captures <b>audit-grade evidence</b> of what your API gateway actually enforced
-                        (TLS/mTLS, JWT outcomes, route decisions, upstream attempts, phase-level timing) and ties it to
-                        <b>immutable config lineage</b>. No traffic blocking. No routing changes. Just defensible truth.
+                        OrbitMesh captures <b>audit-grade evidence</b> of what your API gateway actually enforced, and
+                        ties every request to <b>immutable configuration lineage</b>. No traffic blocking. No routing
+                        changes. Just defensible truth.
                     </p>
 
                     <div class="bullets">
@@ -768,7 +768,7 @@
                             <div>
                                 <b>Easy Install</b>
                                 <small>Deploy audit-grade enforcement evidence in minutes — without blocking or
-                                    modifying traffic</small>
+                                    modifying traffic.</small>
                             </div>
                         </div>
                     </div>
@@ -861,6 +861,9 @@
                     we provide an immutable, cryptographically-linked record of every request, proving that your
                     security policy was enforced at the exact millisecond of execution.</p>
 
+                <p class="muted" style="margin-top: 12px;"><b>Operational safety:</b> If OrbitMesh or its exporter
+                    fails, traffic continues. Worst case is loss of evidence for that window — not downtime.</p>
+
                 <div class="grid-3" style="margin-top: 10px;">
                     <div class="mini">
                         <h4>Audits need evidence</h4>
@@ -892,7 +895,19 @@
                     <h2>Engineered for the 2026 Regulatory Storm</h2>
                 </div>
 
-                <p class="muted">Compliance-ready evidence framing (monitor-only; avoids raw payload storage).</p>
+                <p class="muted">
+                    Built for audits, incidents, and regulatory reviews where proof of enforcement matters more than
+                    dashboards.
+                </p>
+
+                <p class="muted" style="margin-top:6px;">
+                    OrbitMesh is a <b>detective evidence system</b>: it does not prevent compromise, but makes tampering
+                    with evidence <b>detectable and defensible</b>.
+                </p>
+
+
+                <p class="muted" style="margin-top: 12px;"><b>Operational safety:</b> If OrbitMesh or its exporter
+                    fails, traffic continues. Worst case is loss of evidence for that window — not downtime.</p>
 
                 <div class="grid-3" style="margin-top: 10px;">
                     <div class="mini">
@@ -974,7 +989,7 @@
                                 <td>Does this impact production latency?</td>
                                 <td>Low</td>
                                 <td>High (5–20ms)</td>
-                                <td>Near-zero (monitor-only)</td>
+                                <td>Near-zero (monitor-only, bounded)</td>
                             </tr>
                             <tr>
                                 <td>Can you explain exactly what changed and when?</td>
@@ -1138,6 +1153,9 @@ Identify all 'Shadow APIs' currently receiving traffic that are missing from our
                 </div>
                 <p class="muted">SIEM-first, with standard ingestion paths.</p>
 
+                <p class="muted" style="margin-top:6px;">OrbitMesh adds <b>evidence</b>; your SIEM remains the system of
+                    record for retention, search, and reporting.</p>
+
                 <div class="integrations" style="margin-top: 10px;">
                     <div class="list">
                         <div class="li">
@@ -1256,12 +1274,53 @@ Identify all 'Shadow APIs' currently receiving traffic that are missing from our
                     <h2>FAQ</h2>
                 </div>
                 <p class="muted">Clear boundaries (truthful positioning).</p>
+                <p class="muted" style="margin-top: 12px;"><b>Operational safety:</b> If OrbitMesh or its exporter
+                    fails, traffic continues. Worst case is loss of evidence for that window — not downtime.</p>
+
                 <div class="grid-3" style="margin-top: 10px;">
                     <details>
                         <summary>Is OrbitMesh a WAF or prevention tool?</summary>
                         <p>No. OrbitMesh is monitor-only. It does not block requests or modify routing. It produces
                             evidence of enforcement and config lineage.</p>
                     </details>
+
+                    <details>
+                        <summary>Why can’t logs or SIEMs already do this?</summary>
+                        <p>
+                            Logs record events after the fact. OrbitMesh records enforcement decisions at request time
+                            and makes them tamper-evident. This difference matters during audits and incident reviews.
+                        </p>
+                    </details>
+
+
+                    <details>
+                        <summary>What if the gateway host (or OrbitMesh) is compromised?</summary>
+                        <p>
+                            OrbitMesh is designed for <b>detectability</b>, not blind trust. Evidence is hash-linked and
+                            can be <b>verified independently</b> so deletion, reordering, or modification becomes
+                            detectable during audit, incident review, or legal discovery.
+                        </p>
+                    </details>
+
+                    <details>
+                        <summary>Do you store request/response payloads or secrets?</summary>
+                        <p>
+                            No. OrbitMesh records <b>enforcement facts</b> (e.g., TLS/JWT outcomes, route match,
+                            timing, upstream selection) rather than business payloads. Data capture is intentionally
+                            constrained to reduce PII/secret exposure while supporting audits and RCA.
+                        </p>
+                    </details>
+
+                    <details>
+                        <summary>How do we verify evidence months later?</summary>
+                        <p>
+                            Evidence can be validated using the tamper-evident chain and snapshot references without
+                            trusting dashboards or relying on sampled logs. Teams can run offline verification as part
+                            of audit preparation and retention workflows.
+                        </p>
+                    </details>
+
+
 
                     <details>
                         <summary>Do you provide resiliency / failover?</summary>
