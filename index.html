@@ -706,8 +706,10 @@
                     <div class="kicker">monitor-only • cryptographically signed evidence • siem-ready
                     </div>
 
-                    <h1>DORA-Ready Evidence for your API Gateways. </h1>
-                    <h3>Turn your Gateway into an Immutable Audit Machine.</h3>
+                    <h1>Your API Gateway’s "Black Box" </h1>
+                    <h3>Proof of what was actually enforced — not just logged.</h3>
+                    <p style="font-size: 15px; font-style: italic;">Immutable, tamper-evident evidence that auditors
+                        trust.</p>
 
                     <p class="sub">
                         OrbitMesh captures <b>audit-grade evidence</b> of what your API gateway actually enforced
@@ -719,29 +721,34 @@
                         <div class="pill">
                             <span class="icon">✓</span>
                             <div>
-                                <b>Zero impact on p99 (design goal)</b>
-                                <small>Non-blocking capture patterns designed to avoid request-path stalls.</small>
+                                <b>No impact to performance</b>
+                                <small>Runs monitor-only mode inside the gateway data plane, engineered to
+                                    have no impact on p99 latency.</small>
                             </div>
                         </div>
                         <div class="pill">
                             <span class="icon">⛓</span>
                             <div>
-                                <b>Cryptographic chain-of-custody</b>
-                                <small>Hash-linked, tamper-evident evidence tied to config snapshot IDs.</small>
+                                <b>Prove every control was enforced for every request</b>
+                                <small>Capture request-time evidence of what your gateway actually enforced — not
+                                    just what was configured.</small>
                             </div>
                         </div>
                         <div class="pill">
                             <span class="icon">💾</span>
                             <div>
                                 <b>Up to 90% lower storage</b>
-                                <small>Shallow vs deep streams reduce noise while preserving forensic fidelity.</small>
+                                <small>Shallow and deep evidence streams minimize noise while preserving full forensic
+                                    fidelity for audits and investigations.</small>
                             </div>
                         </div>
                         <div class="pill">
                             <span class="icon">🧠</span>
                             <div>
-                                <b>Root-cause ready</b>
-                                <small>Phase + backend attribution to accelerate investigations.</small>
+                                <b>Defensible evidence auditors trust</b>
+                                <small>Each record is tamper-evident, with a verifiable chain of
+                                    evidence you can hand to auditors during SOC 2, PCI, DORA, or incident
+                                    reviews.</small>
                             </div>
                         </div>
 
@@ -749,9 +756,9 @@
                             <span class="icon">🔍</span>
 
                             <div>
-                                <b>API Truthfulness</b>
-                                <small>Sitting in the datapath, we provide real-time attestations and forensic certainty
-                                    that passive observation cannot match.</small>
+                                <b>Fits into your existing SIEM / compliance workflows</b>
+                                <small>Evidence is exportable and queryable alongside your existing tools — Splunk,
+                                    Elastic, GRC platforms — without replacing your current observability stack.</small>
                             </div>
                         </div>
 
@@ -760,7 +767,8 @@
 
                             <div>
                                 <b>Easy Install</b>
-                                <small>Deploy bank-grade forensics in minutes, that never blocks your datapath.</small>
+                                <small>Deploy audit-grade enforcement evidence in minutes — without blocking or
+                                    modifying traffic</small>
                             </div>
                         </div>
                     </div>
@@ -820,10 +828,10 @@
                             <div class="why-join">
                                 <h4>Why teams are joining</h4>
                                 <ul>
-                                    <li><b>Zero impact on p99</b> is a design requirement.</li>
+                                    <li><b>Prove every control was enforced for every request</b></li>
                                     <li><b>Chain-of-custody</b> makes tampering detectable and defensible.</li>
                                     <li><b>Up to 90% storage savings</b> with shallow/deep evidence streams.</li>
-                                    <li><b>2026 Audit Readiness</b>cryptographically provable, continuous monitoring of
+                                    <li><b>2026 Audit Readiness</b> cryptographically provable, continuous monitoring of
                                         every single request—shifting from reactive logs to proactive runtime
                                         attestation.</li>
                                 </ul>
@@ -842,14 +850,13 @@
                 <div class="section-title">
                     <h2>The problem</h2>
                 </div>
-                <p class="muted">Most logs say 'a request happened.' Auditors ask 'what controls were enforced?</p>
-                <p class="muted" style="margin-top: 5px;">In the 2026 regulatory landscape, "Adequate" is no longer the
-                    standard; Continuous
-                    Proof is. Frameworks like DORA (Article 17) and PCI DSS 4.0 have moved beyond traditional sampling,
-                    now requiring financial entities to demonstrate that security controls—like mTLS, rate limiting, and
-                    JWT validation—were active and effective for 100% of transactions, not just a sampled subset.</p>
+                <p class="muted">Logs don’t prove enforcement — they only record events.</p>
+                <p class="muted" style="margin-top: 5px;">Auditors and risk teams need defensible proof that controls
+                    (like JWT, TLS, rate limits) were actually enforced on every request — not just sampled or guessed.
+                </p>
 
-                <p class="muted" style="margin-top: 5px;">OrbitMesh bridges the "Accountability Gap" by sitting directly
+                <p class="muted" style="margin-top: 10px;">OrbitMesh bridges the "Accountability Gap" by sitting
+                    directly
                     in the datapath to provide Runtime Attestation. Instead of an auditor asking for a manual sample,
                     we provide an immutable, cryptographically-linked record of every request, proving that your
                     security policy was enforced at the exact millisecond of execution.</p>
@@ -944,7 +951,7 @@
                     <table class="compare-table" aria-label="OrbitMesh comparison table">
                         <thead>
                             <tr>
-                                <th>Feature</th>
+                                <th>Audit & Incident Questions</th>
                                 <th>Legacy Gateway Logs</th>
                                 <th>Cloud Security Proxies</th>
                                 <th>OrbitMesh</th>
@@ -952,38 +959,39 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Audit Coverage</td>
-                                <td>1–5% (Sampled)</td>
-                                <td>Sampled (Mirror Mode)</td>
-                                <td>100% (Continuous)</td>
+                                <td>Can you prove controls were enforced for every request?</td>
+                                <td>❌ Sampled (1–5%)</td>
+                                <td>⚠️ Partial (mirrored traffic)</td>
+                                <td>✅ 100% request-time evidence</td>
                             </tr>
                             <tr>
-                                <td>Integrity Proof</td>
-                                <td>None (Mutable)</td>
-                                <td>None (SaaS-Stored)</td>
-                                <td>Cryptographic Hash Chain</td>
+                                <td>Is the evidence tamper-proof and auditor-defensible?</td>
+                                <td>❌ Mutable logs</td>
+                                <td>❌ SaaS-stored records</td>
+                                <td>✅ Append-only, tamper-evident</td>
                             </tr>
                             <tr>
-                                <td>Performance Tax</td>
+                                <td>Does this impact production latency?</td>
                                 <td>Low</td>
                                 <td>High (5–20ms)</td>
-                                <td>Near-Zero (&lt;1% CPU)</td>
+                                <td>Near-zero (monitor-only)</td>
                             </tr>
                             <tr>
-                                <td>Config Awareness</td>
-                                <td>"File changed"</td>
-                                <td>Structural only</td>
-                                <td>Semantic Drift (AST-based)</td>
+                                <td>Can you explain exactly what changed and when?</td>
+                                <td>⚠️ File-level only</td>
+                                <td>⚠️ Policy snapshots</td>
+                                <td>✅ Semantic config lineage</td>
                             </tr>
                             <tr>
-                                <td>Regulatory Fit</td>
+                                <td>Is this suitable for regulatory audits?</td>
                                 <td>Partial</td>
-                                <td>HIPAA/SOC 2</td>
-                                <td>DORA / PCI-DSS 4.0 Ready</td>
+                                <td>Limited</td>
+                                <td>Built for DORA, PCI-DSS 4.0, SOC 2</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </section>
 
